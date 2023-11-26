@@ -1,0 +1,87 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn88ttsmywrs3"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_8yfyb"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8yfyb")
+
+[node name="function" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 106.0
+offset_right = 661.0
+offset_bottom = 137.0
+text = "1/x"
+
+[node name="a_value" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 156.0
+offset_right = 257.063
+offset_bottom = 187.0
+text = "1"
+placeholder_text = "1"
+
+[node name="Label" type="Label" parent="a_value"]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 1.0
+offset_right = -16.0
+offset_bottom = 27.0
+text = "a:"
+
+[node name="b_value" type="LineEdit" parent="."]
+offset_left = 348.0
+offset_top = 156.0
+offset_right = 415.063
+offset_bottom = 187.0
+text = "2"
+placeholder_text = "2"
+
+[node name="Label" type="Label" parent="b_value"]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 1.0
+offset_right = -16.0
+offset_bottom = 27.0
+text = "b:"
+
+[node name="n_value" type="LineEdit" parent="."]
+offset_left = 504.0
+offset_top = 157.0
+offset_right = 571.063
+offset_bottom = 188.0
+text = "3"
+placeholder_text = "3"
+
+[node name="Label" type="Label" parent="n_value"]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 1.0
+offset_right = -16.0
+offset_bottom = 27.0
+text = "n:"
+
+[node name="Exec" type="Button" parent="."]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 201.0
+offset_right = 252.0
+offset_bottom = 245.0
+text = "Calcular"
+
+[node name="Output" type="Label" parent="."]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 211.0
+offset_right = 544.0
+offset_bottom = 240.0
+
+[connection signal="focus_exited" from="n_value" to="." method="n_correction"]
+[connection signal="pressed" from="Exec" to="." method="cal"]
