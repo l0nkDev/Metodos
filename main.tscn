@@ -37,6 +37,7 @@ offset_bottom = 27.0
 text = "a:"
 
 [node name="b_value" type="LineEdit" parent="."]
+layout_mode = 0
 offset_left = 348.0
 offset_top = 156.0
 offset_right = 415.063
@@ -53,6 +54,7 @@ offset_bottom = 27.0
 text = "b:"
 
 [node name="n_value" type="LineEdit" parent="."]
+layout_mode = 0
 offset_left = 504.0
 offset_top = 157.0
 offset_right = 571.063
