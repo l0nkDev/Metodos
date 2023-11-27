@@ -11,26 +11,26 @@ func _ready():
 func _process(delta):
 	pass
 
-func translate(str: String) -> String:
+func translate(stri: String) -> String:
 	var i: float = 1
-	while i < str.length():
-		if (str[i-1] in "1234567890") and (str[i] == "x"):
-			str = str.insert(i, "*")
-		if (str[i] == "^"):
-			str[i] = "*"
-			str = str.insert(i, "*")
+	while i < stri.length():
+		if (stri[i-1] in "1234567890") and (stri[i] == "x"):
+			stri = stri.insert(i, "*")
+		if (stri[i] == "^"):
+			stri[i] = "*"
+			stri = stri.insert(i, "*")
 		i += 1
-	return str
+	return stri
 
 func f(fnc: String, x: float) -> float:
-	var exp: String = translate(fnc)
-	expression.parse(exp, ["x"])
+	var expo: String = translate(fnc)
+	expression.parse(expo, ["x"])
 	var res: float = expression.execute([x])
 	if not expression.has_execute_failed():
 		return res
 	else:
 		print("err")
-		return 0
+		return 0.0
 
 func simpson(fnc: String) -> float:
 	var a: float = float($a_value.text)
@@ -54,9 +54,8 @@ func simpson(fnc: String) -> float:
 	print(f(fnc, a))
 	return res*(3*h/8)
 
-func cal():
+func calculate():
 	$Output.text = str(simpson($function.text))
-#	$Output.text = str(f(b))
 
 
 
