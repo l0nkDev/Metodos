@@ -24,13 +24,15 @@ func translate(stri: String) -> String:
 
 func f(fnc: String, x: float) -> float:
 	var expo: String = translate(fnc)
+	print(expo)
+	print(fnc)
 	expression.parse(expo, ["x"])
 	var res: float = expression.execute([x])
 	if not expression.has_execute_failed():
 		return res
 	else:
 		print("err")
-		return 0.0
+		return 37707.0
 
 func simpson(fnc: String) -> float:
 	var a: float = float($a_value.text)
@@ -38,7 +40,6 @@ func simpson(fnc: String) -> float:
 	var n: int = int($n_value.text)
 	var h: float = (b-a)/n
 	var res: float = f(fnc, a)
-	print(f(fnc, a))
 	a += h
 	n -= 1
 	while n > 0:
@@ -47,11 +48,9 @@ func simpson(fnc: String) -> float:
 			print(2*f(fnc, a))
 		else:
 			res += 3*f(fnc, a)
-			print(3*f(fnc, a))
 		a += h
 		n -= 1
 	res += f(fnc, a)
-	print(f(fnc, a))
 	return res*(3*h/8)
 
 func calculate():
