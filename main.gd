@@ -57,7 +57,19 @@ func simpson(fnc: String) -> float:
 func calculate():
 	$Output.text = str(simpson($function.text))
 
-
+func max_min_y(l: float, h: float, fnc: String) -> Array:
+	var max: float = f(fnc, l)
+	var min: float = max
+	var n: int = 0
+	var x: float
+	var y: float
+	while n < 500:
+		x = l+(h*n)
+		y = f(fnc, x)
+		if y > max: max = y
+		if y < min: min = y
+		n += 1
+	return [max, min]
 
 func n_correction():
 	var n: int = int($n_value.text) 
@@ -66,27 +78,30 @@ func n_correction():
 	if n == 0:
 		n = 3
 	$n_value.text = str(n)
+	check_func($function.text)
 
 func graph(f: bool):
 	if f:
 		$graph.visible = true
 		var a: float = float($a_value.text)
 		var b: float = float($b_value.text)
-		var l_limit: float = a-((b-a)/10) 
-		var r_limit: float = b+((b-a)/10)
-		var h = (r_limit-l_limit)/500
+		var l: float = a-((b-a)/10) 
+		var r: float = b+((b-a)/10)
+		var h = (r-l)/500
 		var n = 0
 		var x: float
 		var fnc: String = $function.text
+		var maxmin: Array = max_min_y(l, h, fnc)
+		var scl: float = maxmin[0]-maxmin[1]
 		while n < 500:
-			x = l_limit+(h*n)
-			$graph.set_point_position(n, Vector2(n, f(fnc, x)))
+			x = l+(h*n)
+			$graph.set_point_position(n, Vector2(n, -f(fnc, x)/(h)))
+			print(f(fnc, x))
 			n += 1
 	else:
 		$graph.visible = false
 
 func check_func(new_text):
-	draw_line(Vector2(0,0),Vector2(720,720), Color(0,0,0), 3)
 	var expo: String = translate(new_text)
 	expression.parse(expo, ["x"])
 	var tmp = expression.execute([1])
@@ -100,3 +115,7 @@ func check_func(new_text):
 	else:
 		$output.text = str(simpson($function.text))
 		graph(true)
+
+
+func updt(new_text):
+	check_func($function.text)
