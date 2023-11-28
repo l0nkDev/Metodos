@@ -1,23 +1,29 @@
 extends Control
 
 var expression = Expression.new()
+var graph_scale: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var n: int = 0
+	while n < 500:
+		$graph/fill_above.set_point_position(2*n+1, Vector2(n, 0))
+		$graph/fill_below.set_point_position(2*n+1, Vector2(n, 0))
+		n += 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func translate(stri: String) -> String:
-	var i: float = 0
+	var i: int = 1
+	stri = stri.insert(0, " ")
 	stri = stri.replacen("ln","log")
 	stri = stri.replacen("^", "**")
 	stri = stri.replacen("e", "2.718281828459045")
 	while i < stri.length():
-		if (stri[i-1] in ".1234567890") and (stri[i] not in ".1234567890*"):
+		if (stri[i-1] in ".1234567890") and (stri[i] not in ".1234567890)*/+- "):
 			stri = stri.insert(i, "*")
 		i += 1
 	return stri
@@ -54,54 +60,63 @@ func simpson(fnc: String) -> float:
 #	print(f(fnc, a))
 	return res*(3*h/8)
 
-func calculate():
-	$Output.text = str(simpson($function.text))
-
-func max_min_y(l: float, h: float, fnc: String) -> Array:
-	var max: float = f(fnc, l)
-	var min: float = max
-	var n: int = 0
-	var x: float
-	var y: float
-	while n < 500:
-		x = l+(h*n)
-		y = f(fnc, x)
-		if y > max: max = y
-		if y < min: min = y
-		n += 1
-	return [max, min]
-
 func n_correction():
-	var n: int = int($n_value.text) 
+	var n: int = int($n_value.text)
+	if n < 0:
+		n = 3
 	if  n % 3 != 0:
 		n = n - (n % 3)
-	if n == 0:
+	if n < 0:
 		n = 3
 	$n_value.text = str(n)
-	check_func($function.text)
+	updt($function.text)
 
-func graph(f: bool):
-	if f:
-		$graph.visible = true
-		var a: float = float($a_value.text)
-		var b: float = float($b_value.text)
-		var l: float = a-((b-a)/10) 
-		var r: float = b+((b-a)/10)
-		var h = (r-l)/500
-		var n = 0
-		var x: float
-		var fnc: String = $function.text
-		var maxmin: Array = max_min_y(l, h, fnc)
-		var scl: float = maxmin[0]-maxmin[1]
-		while n < 500:
-			x = l+(h*n)
-			$graph.set_point_position(n, Vector2(n, -f(fnc, x)/(h)))
-			print(f(fnc, x))
-			n += 1
-	else:
-		$graph.visible = false
+func graph():
+	var a: float = float($a_value.text)
+	var b: float = float($b_value.text)
+	if a > b:
+		a = b
+		b = float($a_value.text)
+	var l: float = a-((b-a)/10) 
+	var h = graph_scale
+	var n = 0
+	var drawn_l = false
+	var drawn_r = false
+	var x: float
+	var y: float
+	var fnc: String = $function.text
+	$graph/line/r.set_point_position(0, Vector2(b/h, -f(fnc,b)/(h)))
+	$graph/line/r.set_point_position(1, Vector2(b/h, 0))
+	print("a: " + str(a))
+	print("b: " + str(b))
+	print("h: " + str(h))
+	print()
+	while n < 500:
+		x = l+(h*n)
+		y = f(fnc,x)
+		$graph/line.set_point_position(n, Vector2(n, (-y)/(h)))
+		if not drawn_l and x >= a:
+			$graph/line/l.set_point_position(0, Vector2(n, (-y)/(h)))
+			$graph/line/l.set_point_position(1, Vector2(n, 0))
+			drawn_l = true
+		if x >= b and not drawn_r:
+			$graph/line/r.set_point_position(0, Vector2(n, (-y)/(h)))
+			$graph/line/r.set_point_position(1, Vector2(n, 0))
+			drawn_r = true
+		if x > a and x < b:
+			if y > 0:
+				$graph/fill_above.set_point_position(2*n, Vector2(n, (-y)/(h)))
+				$graph/fill_below.set_point_position(2*n, Vector2(n, 0))
+			else:
+				$graph/fill_above.set_point_position(2*n, Vector2(n, 0))
+				$graph/fill_below.set_point_position(2*n, Vector2(n, (-y)/(h)))
+		else:
+			$graph/fill_above.set_point_position(2*n, Vector2(n, 0))
+			$graph/fill_below.set_point_position(2*n, Vector2(n, 0))
+		#print(f(fnc, x))
+		n += 1
 
-func check_func(new_text):
+func valid_func(new_text) -> bool:
 	var expo: String = translate(new_text)
 	expression.parse(expo, ["x"])
 	var tmp = expression.execute([1])
@@ -110,12 +125,44 @@ func check_func(new_text):
 	print()
 	print(tmp)
 	if str(tmp) == "<null>":
-		$output.text = "•••"
-		graph(false)
+		return false
 	else:
+		return true
+
+
+func updt(_new_text):
+	if valid_func($function.text):
+		graph_scale = (12*float($b_value.text)-12*float($a_value.text))/5000
 		$output.text = str(simpson($function.text))
-		graph(true)
+		graph() 
+		$graph/line.position = Vector2(0, 174)
+		$graph/fill_above.position = Vector2(0, 174)
+		$graph/fill_below.position = Vector2(0, 174)
+		$graph/zero.position = Vector2(0, 174)
+		$graph/line.visible = true
+		$graph/fill_above.visible = true
+		$graph/fill_below.visible = true
+	else:
+		$output.text = "•••"
+		$graph/line.visible = false
+		$graph/fill_above.visible = false
+		$graph/fill_below.visible = false
 
 
-func updt(new_text):
-	check_func($function.text)
+func _on_sc_up_button_up():
+	graph_scale += 0.001
+	graph()
+
+func _on_sc_dw_button_up():
+	graph_scale -= 0.001
+	graph()
+
+func _on_mv_l_pressed():
+	pass # Replace with function body.
+
+
+func _on_mv_up_pressed():
+	$graph/line.position += Vector2(0, 5)
+	$graph/fill_above.position += Vector2(0, 5)
+	$graph/fill_below.position += Vector2(0, 5)
+	$graph/zero.position += Vector2(0, 5)
