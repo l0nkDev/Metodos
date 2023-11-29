@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://chr628k70vii"]
+
+[node name="x1" type="Line2D"]
+visible = false
+points = PackedVector2Array(250, -174, 250, 174)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="num" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_right = 30.0
+offset_bottom = 26.0
+size_flags_vertical = 0
+horizontal_alignment = 1

@@ -50,9 +50,15 @@ points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 width = 2.0
 default_color = Color(0.478431, 0.52549, 0.694118, 1)
 
-[node name="zero" type="Line2D" parent="graph"]
+[node name="zero_x" type="Line2D" parent="graph"]
 position = Vector2(0, 174)
 points = PackedVector2Array(0, 0, 500, 0)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="zero_y" type="Line2D" parent="graph"]
+position = Vector2(0, 174)
+points = PackedVector2Array(250, -174, 250, 174)
 width = 2.0
 default_color = Color(0, 0, 0, 1)
 
@@ -61,17 +67,17 @@ visible = false
 position = Vector2(0, 174)
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 width = 2.0
-default_color = Color(0, 0.270588, 1, 1)
+default_color = Color(0.392157, 0.521569, 1, 1)
 
 [node name="l" type="Line2D" parent="graph/line"]
 points = PackedVector2Array(0, 0, 0, 0)
 width = 2.0
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0, 0.658824, 0.556863, 1)
 
 [node name="r" type="Line2D" parent="graph/line"]
 points = PackedVector2Array(0, 0, 0, 0)
 width = 2.0
-default_color = Color(0, 0, 0, 1)
+default_color = Color(1, 0.482353, 0.517647, 1)
 
 [node name="a" type="Label" parent="graph/line"]
 offset_right = 40.0
@@ -86,6 +92,7 @@ offset_top = 93.0
 offset_right = -110.0
 offset_bottom = 124.0
 grow_horizontal = 2
+text = "0"
 placeholder_text = "Función"
 alignment = 1
 clear_button_enabled = true
@@ -100,7 +107,7 @@ offset_top = 155.0
 offset_right = -142.938
 offset_bottom = 186.0
 grow_horizontal = 2
-text = "1"
+text = "-10"
 
 [node name="Label" type="Label" parent="a_value"]
 modulate = Color(0, 0, 0, 1)
@@ -121,7 +128,7 @@ offset_top = 155.0
 offset_right = -32.9375
 offset_bottom = 186.0
 grow_horizontal = 2
-text = "11"
+text = "10"
 
 [node name="Label" type="Label" parent="b_value"]
 modulate = Color(0, 0, 0, 1)
@@ -166,59 +173,7 @@ text = "•••"
 placeholder_text = "Función"
 alignment = 1
 
-[node name="sc_up" type="Button" parent="."]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 413.0
-offset_right = 93.0
-offset_bottom = 444.0
-text = "up"
-
-[node name="sc_dw" type="Button" parent="."]
-layout_mode = 0
-offset_left = 62.0
-offset_top = 450.0
-offset_right = 94.0
-offset_bottom = 481.0
-text = "dw"
-
-[node name="mv_up" type="Button" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 550.0
-offset_right = 99.0
-offset_bottom = 581.0
-text = "u"
-
-[node name="mv_dw" type="Button" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 585.0
-offset_right = 98.0
-offset_bottom = 616.0
-text = "d"
-
-[node name="mv_l" type="Button" parent="."]
-layout_mode = 0
-offset_left = 60.0
-offset_top = 566.0
-offset_right = 73.0
-offset_bottom = 597.0
-text = "l"
-
-[node name="mv_r" type="Button" parent="."]
-layout_mode = 0
-offset_left = 103.0
-offset_top = 566.0
-offset_right = 118.0
-offset_bottom = 597.0
-text = "r"
-
 [connection signal="text_changed" from="function" to="." method="updt"]
 [connection signal="text_changed" from="a_value" to="." method="updt"]
 [connection signal="text_changed" from="b_value" to="." method="updt"]
 [connection signal="focus_exited" from="n_value" to="." method="n_correction"]
-[connection signal="button_up" from="sc_up" to="." method="_on_sc_up_button_up"]
-[connection signal="button_up" from="sc_dw" to="." method="_on_sc_dw_button_up"]
-[connection signal="pressed" from="mv_up" to="." method="_on_mv_up_pressed"]
-[connection signal="pressed" from="mv_l" to="." method="_on_mv_l_pressed"]
