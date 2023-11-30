@@ -81,20 +81,20 @@ func simpson(fnc: String) -> float:
 	var n: int = int($n_value.text)
 	var h: float = (b-a)/n
 	var res: float = f(fnc, a)
-#	print(f(fnc, a))
+	print(f(fnc, a))
 	a += h
 	n -= 1
 	while n > 0:
 		if n % 3 == 0:
 			res += 2*f(fnc, a)
-#			print(2*f(fnc, a))
+			print(2*f(fnc, a))
 		else:
 			res += 3*f(fnc, a)
-#			print(3*f(fnc, a))
+			print(3*f(fnc, a))
 		a += h
 		n -= 1
 	res += f(fnc, a)
-#	print(f(fnc, a))
+	print(f(fnc, a))
 	return res*(3*h/8)
 
 func n_correction():
@@ -125,6 +125,36 @@ func calc_x_line_h() -> float:
 	print(500*graph_scale)
 	print(l_h)
 	return l_h
+
+func draw_y_axis(x_line_h: float, n: int):
+	var y_h = x_line_h / graph_scale
+	var pos_y = 0
+	var child_cnt = 0
+	var y_cnt: float = 0
+	while pos_y <= 348 - $graph/zero_x.position.y:
+		$graph/zero_y.get_child(child_cnt).set_point_position(0, Vector2(n - 6, $graph/zero_x.position.y - 174 + pos_y))
+		$graph/zero_y.get_child(child_cnt).set_point_position(1, Vector2(n + 4, $graph/zero_x.position.y - 174 + pos_y))
+		$graph/zero_y.get_child(child_cnt).get_child(0).position = Vector2(n - 6 - $graph/zero_y.get_child(child_cnt).get_child(0).size.x, $graph/zero_x.position.y - 185 + pos_y)
+		if y_cnt != 0: $graph/zero_y.get_child(child_cnt).get_child(0).text = str(y_cnt)
+		$graph/zero_y.get_child(child_cnt).visible = true
+		y_cnt -= x_line_h
+		pos_y += y_h
+		child_cnt += 1
+		$graph/zero_y.add_child(x_l.instantiate())
+	pos_y = 0
+	y_cnt = 0
+	while pos_y >= -$graph/zero_x.position.y:
+		$graph/zero_y.get_child(child_cnt).set_point_position(0, Vector2(n - 6, $graph/zero_x.position.y - 174 + pos_y))
+		$graph/zero_y.get_child(child_cnt).set_point_position(1, Vector2(n + 4, $graph/zero_x.position.y - 174 + pos_y))
+		$graph/zero_y.get_child(child_cnt).get_child(0).position = Vector2(n - 6 - $graph/zero_y.get_child(child_cnt).get_child(0).size.x, $graph/zero_x.position.y - 185 + pos_y)
+		if y_cnt != 0: $graph/zero_y.get_child(child_cnt).get_child(0).text = str(y_cnt)
+		$graph/zero_y.get_child(child_cnt).visible = true
+		y_cnt += x_line_h
+		pos_y -= y_h
+		if pos_y >= -$graph/zero_x.position.y:
+			child_cnt += 1
+			$graph/zero_y.add_child(x_l.instantiate())
+	print("pos_y: ", pos_y)
 
 func graph():
 	var a: float = float($a_value.text)
@@ -167,34 +197,7 @@ func graph():
 		if not $graph/zero_y.visible and x > 0 and graph_l <= 0:
 			$graph/zero_y.set_point_position(0, Vector2(n - 1, 174))
 			$graph/zero_y.set_point_position(1, Vector2(n - 1, -174))
-			var y_h = x_line_h / graph_scale
-			var pos_y = 0
-			var child_cnt = 0
-			var y_cnt: float = 0
-			while pos_y <= 348 - $graph/zero_x.position.y:
-				$graph/zero_y.get_child(child_cnt).set_point_position(0, Vector2(n - 6, $graph/zero_x.position.y - 174 + pos_y))
-				$graph/zero_y.get_child(child_cnt).set_point_position(1, Vector2(n + 4, $graph/zero_x.position.y - 174 + pos_y))
-				$graph/zero_y.get_child(child_cnt).get_child(0).position = Vector2(n - 6 - $graph/zero_y.get_child(child_cnt).get_child(0).size.x, $graph/zero_x.position.y - 185 + pos_y)
-				if y_cnt != 0: $graph/zero_y.get_child(child_cnt).get_child(0).text = str(y_cnt)
-				$graph/zero_y.get_child(child_cnt).visible = true
-				y_cnt -= x_line_h
-				pos_y += y_h
-				child_cnt += 1
-				$graph/zero_y.add_child(x_l.instantiate())
-			pos_y = 0
-			y_cnt = 0
-			while pos_y >= -$graph/zero_x.position.y:
-				$graph/zero_y.get_child(child_cnt).set_point_position(0, Vector2(n - 6, $graph/zero_x.position.y - 174 + pos_y))
-				$graph/zero_y.get_child(child_cnt).set_point_position(1, Vector2(n + 4, $graph/zero_x.position.y - 174 + pos_y))
-				$graph/zero_y.get_child(child_cnt).get_child(0).position = Vector2(n - 6 - $graph/zero_y.get_child(child_cnt).get_child(0).size.x, $graph/zero_x.position.y - 185 + pos_y)
-				if y_cnt != 0: $graph/zero_y.get_child(child_cnt).get_child(0).text = str(y_cnt)
-				$graph/zero_y.get_child(child_cnt).visible = true
-				y_cnt += x_line_h
-				pos_y -= y_h
-				if pos_y >= -$graph/zero_x.position.y:
-					child_cnt += 1
-					$graph/zero_y.add_child(x_l.instantiate())
-			print("pos_y: ", pos_y)
+			draw_y_axis(x_line_h, n)
 			$graph/zero_y.visible = true
 		for x_line in $graph/zero_x.get_children():
 			if x > x_line_cnt and not x_line.visible:
@@ -217,6 +220,36 @@ func graph():
 			$graph/fill_below.set_point_position(2*n, Vector2(n, 0))
 		#print(f(fnc, x))
 		n += 1
+	if $graph/zero_x.position.y < 0:
+		for x_line in $graph/zero_x.get_children():
+			x_line.set_point_position(0, Vector2(x_line.get_point_position(0).x, -$graph/zero_x.position.y))
+			x_line.set_point_position(1, Vector2(x_line.get_point_position(1).x, -$graph/zero_x.position.y + 7))
+			x_line.get_child(0).position.y = -$graph/zero_x.position.y
+		$graph/zero_x.add_child(x_l.instantiate())
+		$graph/zero_x.get_child($graph/zero_x.get_child_count() - 1).set_point_position(0, Vector2(0, -$graph/zero_x.position.y + 1))
+		$graph/zero_x.get_child($graph/zero_x.get_child_count() - 1).set_point_position(1, Vector2(500, -$graph/zero_x.position.y + 1))
+		$graph/zero_x.get_child($graph/zero_x.get_child_count() - 1).visible = true
+	elif $graph/zero_x.position.y > 348:
+		for x_line in $graph/zero_x.get_children():
+			x_line.set_point_position(0, Vector2(x_line.get_point_position(0).x, 348 - $graph/zero_x.position.y))
+			x_line.set_point_position(1, Vector2(x_line.get_point_position(1).x, 348 - $graph/zero_x.position.y - 7))
+			x_line.get_child(0).position.y = 320 - $graph/zero_x.position.y
+		$graph/zero_x.add_child(x_l.instantiate())
+		$graph/zero_x.get_child($graph/zero_x.get_child_count() - 1).set_point_position(0, Vector2(0, 347 - $graph/zero_x.position.y))
+		$graph/zero_x.get_child($graph/zero_x.get_child_count() - 1).set_point_position(1, Vector2(500, 347 -$graph/zero_x.position.y))
+		$graph/zero_x.get_child($graph/zero_x.get_child_count() - 1).visible = true
+	if not $graph/zero_y.visible and graph_l <= 0:
+		draw_y_axis(x_line_h, n)
+		$graph/zero_y.set_point_position(0, Vector2(n - 1, 174))
+		$graph/zero_y.set_point_position(1, Vector2(n - 1, -174))
+		$graph/zero_y.visible = true
+	elif not $graph/zero_y.visible and graph_l >= 0:
+		draw_y_axis(x_line_h, 2)
+		$graph/zero_y.set_point_position(0, Vector2(1, 174))
+		$graph/zero_y.set_point_position(1, Vector2(1, -174))
+		for y_line in $graph/zero_y.get_children():
+			y_line.get_child(0).position.x = 5
+		$graph/zero_y.visible = true
 
 func valid_func(new_text) -> bool:
 	var expo: String = translate(new_text)
